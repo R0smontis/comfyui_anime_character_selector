@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v135_list(self) -> None:
-        self.assertEqual(5715, len(selector._CHARACTER_MAP))
-        self.assertEqual(5716, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5716, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v136_list(self) -> None:
+        self.assertEqual(5718, len(selector._CHARACTER_MAP))
+        self.assertEqual(5719, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5719, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -352,6 +352,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "希帕提娅（无期迷途）": "hypatia (path to nowhere)",
             "德雷雅（无期迷途）": "dreya (path to nowhere)",
             "标枪（碧蓝航线）": "javelin (azur lane)",
+            "美美（公主连结！Re:Dive）": "mimi (princess connect!)",
+            "静流（公主连结！Re:Dive）": "shizuru (princess connect!)",
+            "纺希（公主连结！Re:Dive）": "tsumugi (princess connect!)",
+            "优衣（公主连结！Re:Dive）": "yui (princess connect!)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
