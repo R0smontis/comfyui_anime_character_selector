@@ -7,7 +7,8 @@ Arknights: Endfield, Wuthering Waves, and Zenless Zone Zero. Version 1.1.0
 also imports canonical Arknights operator tags from the public AnimaDex
 catalogue when matched to the bilingual operator roster. Version 1.2.0 adds
 31 mainland-China Blue Archive base-character tags with exact model-tag
-evidence.
+evidence. Version 1.3.0 adds 11 NIKKE base-character tags verified against
+Chinese character pages and exact model-tag evidence.
 """
 
 from __future__ import annotations
