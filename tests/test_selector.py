@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v136_list(self) -> None:
-        self.assertEqual(5718, len(selector._CHARACTER_MAP))
-        self.assertEqual(5719, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5719, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v137_list(self) -> None:
+        self.assertEqual(5723, len(selector._CHARACTER_MAP))
+        self.assertEqual(5724, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5724, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -356,6 +356,12 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "静流（公主连结！Re:Dive）": "shizuru (princess connect!)",
             "纺希（公主连结！Re:Dive）": "tsumugi (princess connect!)",
             "优衣（公主连结！Re:Dive）": "yui (princess connect!)",
+            "阿尔法（战双帕弥什）": "alpha (pgr)",
+            "21号（战双帕弥什）": "no. 21 (pgr)",
+            "拉弥亚（战双帕弥什）": "lamia (pgr)",
+            "罗塞塔（战双帕弥什）": "rosetta (pgr)",
+            "邦比娜塔（战双帕弥什）": "bambinata (pgr)",
+            "赛琳娜（战双帕弥什）": "selena (pgr)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
