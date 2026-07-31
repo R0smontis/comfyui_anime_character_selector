@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v116_list(self) -> None:
-        self.assertEqual(5588, len(selector._CHARACTER_MAP))
-        self.assertEqual(5589, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5589, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v117_list(self) -> None:
+        self.assertEqual(5602, len(selector._CHARACTER_MAP))
+        self.assertEqual(5603, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5603, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -172,6 +172,20 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "九能带刀（乱马½）": "kunou tatewaki",
             "九能小太刀（乱马½）": "kunou kodachi",
             "五寸钉光（乱马½）": "gosunkugi hikaru",
+            "阿迪涅（天元突破）": "adiane",
+            "达莉·阿代（天元突破）": "darry adai",
+            "基米·阿代（天元突破）": "gimmy adai",
+            "奇坦·巴奇卡（天元突破）": "kittan bachika",
+            "吉永·巴奇卡（天元突破）": "kiyoh bachika",
+            "利珑·利特纳（天元突破）": "leeron littner",
+            "罗杰侬（天元突破）": "lordgenome",
+            "维拉尔（天元突破）": "viral (ttgl)",
+            "黎星刻（反叛的鲁路修）": "li xingke",
+            "利瓦尔·卡尔德蒙德（反叛的鲁路修）": "rivalz cardemonde",
+            "查尔斯·Di·布里塔尼亚（反叛的鲁路修）": "charles zi britannia",
+            "修奈泽尔·El·布里塔尼亚（反叛的鲁路修）": "schneizel el britannia",
+            "藤堂镜志朗（反叛的鲁路修）": "toudou kyoushirou",
+            "篠崎咲世子（反叛的鲁路修）": "shinozaki sayoko",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
