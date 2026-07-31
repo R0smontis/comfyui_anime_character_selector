@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v112_list(self) -> None:
-        self.assertEqual(5549, len(selector._CHARACTER_MAP))
-        self.assertEqual(5550, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5550, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v113_list(self) -> None:
+        self.assertEqual(5553, len(selector._CHARACTER_MAP))
+        self.assertEqual(5554, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5554, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -132,6 +132,11 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "木之本藤隆（魔卡少女樱）": "kinomoto fujitaka",
             "木之本桃矢（魔卡少女樱）": "kinomoto touya",
             "月城雪兔（魔卡少女樱）": "tsukishiro yukito",
+            "艾德（星际牛仔）": "edward wong hau pepelu tivrusky iv",
+            "艾丽卡·欧维罗（星际牛仔）": "electra ovilo",
+            "朱莉娅（星际牛仔）": "julia (cowboy bebop)",
+            "比夏斯（星际牛仔）": "vicious (cowboy bebop)",
+            "文森特·渥拉裘（星际牛仔）": "vincent volaju",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
