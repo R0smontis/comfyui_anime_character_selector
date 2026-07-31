@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v113_list(self) -> None:
-        self.assertEqual(5553, len(selector._CHARACTER_MAP))
-        self.assertEqual(5554, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5554, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v114_list(self) -> None:
+        self.assertEqual(5559, len(selector._CHARACTER_MAP))
+        self.assertEqual(5560, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5560, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -137,6 +137,12 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "朱莉娅（星际牛仔）": "julia (cowboy bebop)",
             "比夏斯（星际牛仔）": "vicious (cowboy bebop)",
             "文森特·渥拉裘（星际牛仔）": "vincent volaju",
+            "高须龙儿（龙与虎）": "takasu ryuuji",
+            "高须泰子（龙与虎）": "takasu yasuko",
+            "虚妹（凉宫春日的忧郁）": "kyon's sister",
+            "三味线（凉宫春日的忧郁）": "shamisen (suzumiya haruhi)",
+            "谷口（凉宫春日的忧郁）": "taniguchi (suzumiya haruhi)",
+            "国木田（凉宫春日的忧郁）": "kunikida (suzumiya haruhi)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
