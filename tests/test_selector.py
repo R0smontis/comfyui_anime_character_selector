@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v123_list(self) -> None:
-        self.assertEqual(5680, len(selector._CHARACTER_MAP))
-        self.assertEqual(5681, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5681, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v124_list(self) -> None:
+        self.assertEqual(5682, len(selector._CHARACTER_MAP))
+        self.assertEqual(5683, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5683, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -271,6 +271,20 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "玛露希尔（迷宫饭）": "marcille donato",
             "尤贝尔（葬送的芙莉莲）": "ubel (sousou no frieren)",
             "山田杏奈（我心里危险的东西）": "yamada anna",
+            "恰斯卡（原神）": "chasca (genshin impact)",
+            "艾梅莉埃（原神）": "emilie (genshin impact)",
+            "圣园未花（蔚蓝档案）": "mika (blue archive)",
+            "早濑优香（蔚蓝档案）": "yuuka (blue archive)",
+            "白洲梓（蔚蓝档案）": "azusa (blue archive)",
+            "空崎阳奈（蔚蓝档案）": "hina (blue archive)",
+            "陆八魔阿露（蔚蓝档案）": "aru (blue archive)",
+            "河和静子（蔚蓝档案）": "shizuko (blue archive)",
+            "下江小春（蔚蓝档案）": "koharu (blue archive)",
+            "春原旬（蔚蓝档案）": "shun (blue archive)",
+            "调月莉音（蔚蓝档案）": "rio (blue archive)",
+            "玛薇卡（原神）": "mavuika (genshin impact)",
+            "希诺宁（原神）": "xilonen (genshin impact)",
+            "瓦蕾莎（原神）": "varesa (genshin impact)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
