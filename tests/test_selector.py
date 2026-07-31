@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v132_list(self) -> None:
-        self.assertEqual(5700, len(selector._CHARACTER_MAP))
-        self.assertEqual(5701, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5701, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v133_list(self) -> None:
+        self.assertEqual(5709, len(selector._CHARACTER_MAP))
+        self.assertEqual(5710, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5710, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -335,6 +335,16 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "德丽莎·阿波卡利斯（月下眷属）（崩坏3rd）": "theresa apocalypse (luna kindred)",
             "德丽莎·阿波卡利斯（月誓绯爱）（崩坏3rd）": "theresa apocalypse (lunar vow  crimson love)",
             "德丽莎·阿波卡利斯（女武神誓约）（崩坏3rd）": "theresa apocalypse (valkyrie pledge)",
+            "沙洛姆（无期迷途）": "shalom (path to nowhere)",
+            "罗睺（无期迷途）": "rahu (path to nowhere)",
+            "卓娅（无期迷途）": "zoya (path to nowhere)",
+            "可可莉克（无期迷途）": "coquelic (path to nowhere)",
+            "兰利（无期迷途）": "langley (path to nowhere)",
+            "赫卡蒂（无期迷途）": "hecate (path to nowhere)",
+            "黛伦（无期迷途）": "deren (path to nowhere)",
+            "诺克斯（无期迷途）": "nox (path to nowhere)",
+            "白逸（无期迷途）": "bai yi (path to nowhere)",
+            "卡利奥斯特罗（碧蓝幻想）": "cagliostro (granblue fantasy)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
