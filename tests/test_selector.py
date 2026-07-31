@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v129_list(self) -> None:
-        self.assertEqual(5692, len(selector._CHARACTER_MAP))
-        self.assertEqual(5693, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5693, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v130_list(self) -> None:
+        self.assertEqual(5694, len(selector._CHARACTER_MAP))
+        self.assertEqual(5695, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5695, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -320,6 +320,8 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "樱井美代（蔚蓝档案）": "miyo (blue archive)",
             "空井咲（蔚蓝档案）": "saki (blue archive)",
             "空井咲（泳装）（蔚蓝档案）": "saki (swimsuit) (blue archive)",
+            "泷口宵（皎洁迎宵之月）": "takiguchi yoi",
+            "可可（尖帽子魔法工房）": "coco (tongari boushi no atelier)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
