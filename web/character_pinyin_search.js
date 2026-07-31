@@ -1,19 +1,18 @@
-// 角色选择器拼音首字母搜索（ComfyUI 扩展）
+// 角色选择器下拉菜单拼音搜索（ComfyUI 扩展）
 //
-// 为二次元角色选择器节点的角色下拉框附加一个拼音首字母搜索框：
-//   - 输入中文子串直接匹配（ComfyUI 原生下拉搜索已支持，此处同样生效）
-//   - 输入拼音首字母（如 "kl" -> 凯露、"ht" -> 胡桃）也可匹配
-// 匹配数据由 tools/generate_pinyin_data.py 生成并随 web/extensions/pinyin_data.js
-// 提供（globalThis.__CHARACTER_PINYIN__），本文件在用户交互时才读取该全局量，
-// 与数据文件加载顺序无关。
+// 思路：不新增自绘搜索框，而是接管 ComfyUI 内建扩展（Comfy.ContextMenuFilter）
+// 注入 combo 下拉菜单的默认过滤输入框（input.comfy-context-menu-filter）：
+//   - 输入拼音首字母（ht -> 胡桃）、全拼（hutao -> 胡桃）、模糊容错（huato/糊桃 -> 胡桃）、
+//     中文子串均可匹配角色中文名
+//   - 显示全部匹配候选（多候选），方向键/Enter/Escape 导航与 Comfy 原生一致
+// 实现：在捕获阶段监听过滤框的 input/keydown 并 stopImmediatePropagation，
+// 使内建扩展的纯子串过滤逻辑不再执行；非中文菜单（英文名等）不接管，走原逻辑。
+// 拼音数据由 tools/generate_pinyin_data.py 生成，见 web/pinyin_data.js
+// （globalThis.__CHARACTER_PINYIN__，每条 { i: 首字母, p: 全拼, c: 核心拼音 }）。
 import { app } from "../../scripts/app.js";
 
-const NODE_TYPES = ["AnimeCharacterSelectorCN", "illustrious_character_select"];
-const COMBO_WIDGET = "character";
-const MAX_RESULTS = 50;
-const INPUT_H = 28;
-const ROW_H = 20;
-const MAX_LIST_H = 160;
+const CJK_RE = /[\u3400-\u9fff\uf900-\ufaff]/;
+const MAX_RESULTS = 100;
 
 function pinyinOf(name) {
   const index = globalThis.__CHARACTER_PINYIN__;
@@ -22,8 +21,6 @@ function pinyinOf(name) {
   if (typeof entry === "string") return { i: entry, p: "", c: "" }; // 兼容旧格式
   return { i: entry.i || "", p: entry.p || "", c: entry.c || "" };
 }
-
-const CJK_RE = /[\u3400-\u9fff\uf900-\ufaff]/;
 
 // Damerau-Levenshtein（相邻换位计 1），用于模糊匹配
 function editDistance(a, b) {
@@ -41,7 +38,6 @@ function editDistance(a, b) {
     for (let j = 1; j <= bl; j++) {
       const cost = a[i - 1] === b[j - 1] ? 0 : 1;
       let v = Math.min(cur[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
-      // 相邻换位：a[i-2]==b[j-1] && a[i-1]==b[j-2]
       if (i > 1 && j > 1 && a[i - 2] === b[j - 1] && a[i - 1] === b[j - 2]) {
         v = Math.min(v, prevPrev + 1);
       }
@@ -59,6 +55,8 @@ function fuzzyMaxDist(q) {
   return q.length <= 4 ? 1 : 2;
 }
 
+// 返回命中的名字数组（按匹配质量排序，前 MAX_RESULTS 个）。
+// 排序仅决定截断边界，菜单内仍按原始 values 顺序展示。
 function filterNames(names, query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
@@ -83,12 +81,12 @@ function filterNames(names, query) {
       ranked.push([n, 3]);
       continue;
     }
-    if (i.includes(q) || p.includes(q)) {
+    // 包含匹配（rank 4）：仅对 >=3 字符查询启用，避免 2 字符首字母子串噪音
+    if (q.length >= 3 && (i.includes(q) || p.includes(q))) {
       ranked.push([n, 4]);
       continue;
     }
-    // 模糊通道（rank 5）：核心拼音错打 / 中文错字 / 全拼错打
-    // 对 核心拼音/中文名 的前缀窗口计算距离，支持“部分输入+错打”（如 kongxi -> 空崎）
+    // 模糊通道（rank 5）：核心拼音 / 中文名前缀窗口 + 长度惩罚
     let best = -1;
     if (q.length >= 2) {
       const tryWindow = (candidate) => {
@@ -96,109 +94,136 @@ function filterNames(names, query) {
         const lo = Math.max(1, q.length - maxDist);
         const hi = Math.min(candidate.length, q.length + maxDist);
         for (let L = lo; L <= hi; L++) {
-          // 距离 + 长度差惩罚：抑制“前缀相似但明显更短”的噪音候选
           const d = editDistance(candidate.slice(0, L), q) + Math.abs(L - q.length);
           if (d <= maxDist) best = best < 0 ? d : Math.min(best, d);
         }
       };
       tryWindow(c);
       if (best < 0 && CJK_RE.test(q)) tryWindow(lower);
-      // 纯拉丁核心条目（如 La Signora（原神））不走模糊：其拉丁名可由通用子串通道直接命中
+      // 纯拉丁核心条目（如 La Signora（原神））不走模糊：拉丁名由子串通道直接命中
     }
     if (best >= 0) ranked.push([n, 5, best]);
   }
-  ranked.sort((a, b) => a[1] - b[1] || a[2] - b[2] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+  ranked.sort(
+    (a, b) => a[1] - b[1] || a[2] - b[2] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)
+  );
   return ranked.slice(0, MAX_RESULTS).map(([n]) => n);
 }
 
-function buildSearchWidget(node, charWidget) {
-  const allNames = charWidget.options?.values || [];
-  const container = document.createElement("div");
-  container.style.cssText =
-    "display:flex;flex-direction:column;gap:2px;width:100%;height:100%;";
+// 接管 Comfy.ContextMenuFilter 注入的默认过滤框。
+// 做法：cloneNode 替换过滤框（cloneNode 不复制 addEventListener 监听器），
+// 从而彻底移除内建扩展绑定的纯子串过滤与键盘导航，改绑我们的实现。
+// 返回 true 表示已接管。
+function enhanceMenu(ctx, values) {
+  if (!ctx || !ctx.root) return false;
+  const filter = ctx.root.querySelector(".comfy-context-menu-filter");
+  if (!filter) return false;
 
-  const input = document.createElement("input");
-  input.type = "text";
-  input.placeholder = "拼音 / 中文 / 模糊搜索…";
-  input.spellcheck = false;
-  input.style.cssText =
-    "flex:0 0 auto;width:100%;box-sizing:border-box;font-size:12px;" +
-    "padding:2px 4px;border:1px solid #444;border-radius:3px;" +
-    "background:#222;color:#eee;";
-  container.appendChild(input);
+  const names = values.filter((v) => typeof v === "string");
+  if (!names.some((n) => CJK_RE.test(n))) return false; // 非中文菜单：交给原生逻辑
 
-  const list = document.createElement("div");
-  list.style.cssText =
-    "flex:1 1 auto;overflow-y:auto;display:none;border:1px solid #333;" +
-    "border-radius:3px;background:#1a1a1a;";
-  container.appendChild(list);
+  const items = Array.from(ctx.root.querySelectorAll(".litemenu-entry"));
+  if (!items.length) return false;
 
-  let visible = 0;
-  function render(items) {
-    list.innerHTML = "";
-    visible = items.length;
-    for (const name of items) {
-      const item = document.createElement("div");
-      item.textContent = name;
-      item.style.cssText =
-        "padding:2px 6px;font-size:12px;cursor:pointer;white-space:nowrap;" +
-        "overflow:hidden;text-overflow:ellipsis;color:#ddd;";
-      item.addEventListener("mouseenter", () => {
-        item.style.background = "#2a4a7a";
-      });
-      item.addEventListener("mouseleave", () => {
-        item.style.background = "transparent";
-      });
-      item.addEventListener("click", () => {
-        charWidget.value = name;
-        if (typeof charWidget.callback === "function") charWidget.callback(name);
-        node.graph?.setDirtyCanvas(true, true);
-        list.style.display = "none";
-        input.blur();
-      });
-      list.appendChild(item);
+  // 替换元素以丢弃内建扩展的监听器；克隆保留 class/placeholder 等属性
+  const input = filter.cloneNode(true);
+  filter.replaceWith(input);
+
+  let displayed = items;
+  let count = displayed.length;
+  let selectedIndex = 0;
+  let selectedItem = displayed[0] ?? null;
+
+  const updateSelected = () => {
+    if (selectedItem) {
+      selectedItem.style.setProperty("background-color", "");
+      selectedItem.style.setProperty("color", "");
     }
-    list.style.display = items.length ? "block" : "none";
-  }
-
-  input.addEventListener("input", () => {
-    node._pinyinQuery = input.value;
-    render(filterNames(allNames, input.value));
-    node.setSize([node.size[0], node.size[1]]);
-  });
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      list.style.display = "none";
-    } else if (e.key === "Enter" && list.firstChild) {
-      list.firstChild.click();
+    selectedItem = displayed[selectedIndex];
+    if (selectedItem) {
+      selectedItem.style.setProperty("background-color", "#ccc", "important");
+      selectedItem.style.setProperty("color", "#000", "important");
     }
-  });
-
-  const widget = node.addDOMWidget("pinyin_search", "pinyin", {
-    getValue: () => node._pinyinQuery || "",
-    setValue: (v) => {
-      node._pinyinQuery = v || "";
-      if (input.value !== v) input.value = v || "";
-    },
-  }, { serialize: false });
-  widget.computeSize = function () {
-    return [Math.max(node.size[0] - 24, 150), INPUT_H + (visible ? Math.min(visible * ROW_H, MAX_LIST_H) + 2 : 0)];
   };
-  widget.element = container;
-  return widget;
+
+  const applyFilter = (term) => {
+    const q = term.trim();
+    const hits = q ? new Set(filterNames(names, q)) : null;
+    displayed = items.filter((item) => {
+      const visible = !hits || hits.has(item.textContent);
+      item.style.display = visible ? "block" : "none";
+      return visible;
+    });
+    selectedIndex = 0;
+    if (selectedItem && displayed.includes(selectedItem)) {
+      selectedIndex = displayed.findIndex((d) => d === selectedItem);
+    }
+    count = displayed.length;
+    updateSelected();
+  };
+
+  input.addEventListener("input", () => applyFilter(input.value));
+  input.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case "ArrowUp":
+        e.preventDefault();
+        selectedIndex = selectedIndex === 0 ? count - 1 : selectedIndex - 1;
+        updateSelected();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        selectedIndex = selectedIndex === count - 1 ? 0 : selectedIndex + 1;
+        updateSelected();
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        selectedIndex = count - 1;
+        updateSelected();
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        selectedIndex = 0;
+        updateSelected();
+        break;
+      case "Enter":
+        selectedItem?.click();
+        break;
+      case "Escape":
+        ctx.close();
+        break;
+    }
+  });
+
+  // 初始化：定位当前选中值对应项（与 Comfy 原生行为一致）并聚焦过滤框
+  requestAnimationFrame(() => {
+    const currentNode = window.LiteGraph?.LGraphCanvas?.active_canvas?.current_node;
+    const clickedValue = currentNode?.widgets
+      ?.filter((w) => w.type === "combo" && w.options?.values?.length === values.length)
+      .find((w) => w.options.values?.every((v, i) => v === values[i]))?.value;
+    const idx = clickedValue ? values.findIndex((v) => v === clickedValue) : -1;
+    selectedIndex = idx >= 0 ? idx : 0;
+    updateSelected();
+    input.focus();
+  });
+
+  return true;
 }
 
 app.registerExtension({
   name: "comfy.character_pinyin_search",
-  async beforeRegisterNodeDef(nodeType, nodeData) {
-    if (!NODE_TYPES.includes(nodeType.comfyClass)) return;
-    const onNodeCreated = nodeType.prototype.onNodeCreated;
-    nodeType.prototype.onNodeCreated = function () {
-      const result = onNodeCreated?.apply(this, arguments);
-      const charWidget = this.widgets?.find((w) => w.name === COMBO_WIDGET);
-      if (!charWidget || !Array.isArray(charWidget.options?.values)) return result;
-      buildSearchWidget(this, charWidget);
-      return result;
+  init() {
+    // 此刻 LiteGraph.ContextMenu 已被 Comfy.ContextMenuFilter 替换为 wrapper
+    // （内建扩展先于自定义扩展注册）。包一层：构造完成后接管过滤框。
+    const baseContextMenu = LiteGraph.ContextMenu;
+    LiteGraph.ContextMenu = function (values, options) {
+      const ctx = baseContextMenu(values, options);
+      try {
+        if (options?.className === "dark") enhanceMenu(ctx, values);
+      } catch (err) {
+        console.error("[character_pinyin_search] enhance failed:", err);
+      }
+      return ctx;
     };
+    LiteGraph.ContextMenu.prototype = baseContextMenu.prototype;
   },
 });
