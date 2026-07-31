@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v19_list(self) -> None:
-        self.assertEqual(5531, len(selector._CHARACTER_MAP))
-        self.assertEqual(5532, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5532, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v110_list(self) -> None:
+        self.assertEqual(5537, len(selector._CHARACTER_MAP))
+        self.assertEqual(5538, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5538, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -114,6 +114,12 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "茉莉安（尘白禁区）": "marian andreotti",
             "苔丝（尘白禁区）": "tess kotkin",
             "薇蒂雅（尘白禁区）": "vidya shannon",
+            "贝尼（黑礁）": "benny (black lagoon)",
+            "达奇（黑礁）": "dutch (black lagoon)",
+            "法比奥拉（黑礁）": "fabiola iglesias",
+            "格蕾特尔（黑礁）": "gretel (black lagoon)",
+            "汉塞尔（黑礁）": "hansel (black lagoon)",
+            "约兰达（黑礁）": "yolanda (black lagoon)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
