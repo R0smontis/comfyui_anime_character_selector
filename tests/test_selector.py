@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v18_list(self) -> None:
-        self.assertEqual(5514, len(selector._CHARACTER_MAP))
-        self.assertEqual(5515, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5515, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v19_list(self) -> None:
+        self.assertEqual(5531, len(selector._CHARACTER_MAP))
+        self.assertEqual(5532, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5532, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -97,6 +97,23 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "万敌（崩坏：星穹铁道）": "mydei (honkai: star rail)",
             "火花（崩坏：星穹铁道）": "sparxie (honkai: star rail)",
             "缇宝（崩坏：星穹铁道）": "tribbie (honkai: star rail)",
+            "安卡希雅（尘白禁区）": "acacia (snowbreak)",
+            "卜卜（尘白禁区）": "bubu (snowbreak)",
+            "猫汐尔（尘白禁区）": "mauxir (snowbreak)",
+            "晴（尘白禁区）": "naruse haru (snowbreak)",
+            "妮塔（尘白禁区）": "nita (snowbreak)",
+            "瑟瑞斯（尘白禁区）": "siris (snowbreak)",
+            "肴（尘白禁区）": "yao (snowbreak)",
+            "琴诺（尘白禁区）": "cherno kegaard",
+            "伊切尔（尘白禁区）": "eatchel gustav",
+            "芬妮（尘白禁区）": "fenny golden",
+            "里芙（尘白禁区）": "lyfe bestla",
+            "恩雅（尘白禁区）": "enya murphy",
+            "芙提雅（尘白禁区）": "fritia ignis",
+            "凯茜娅（尘白禁区）": "katya klein",
+            "茉莉安（尘白禁区）": "marian andreotti",
+            "苔丝（尘白禁区）": "tess kotkin",
+            "薇蒂雅（尘白禁区）": "vidya shannon",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
