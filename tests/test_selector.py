@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v111_list(self) -> None:
-        self.assertEqual(5546, len(selector._CHARACTER_MAP))
-        self.assertEqual(5547, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5547, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v112_list(self) -> None:
+        self.assertEqual(5549, len(selector._CHARACTER_MAP))
+        self.assertEqual(5550, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5550, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -129,6 +129,9 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "春原芽衣（CLANNAD）": "sunohara mei",
             "春原阳平（CLANNAD）": "sunohara youhei",
             "芳野祐介（CLANNAD）": "yoshino yuusuke",
+            "木之本藤隆（魔卡少女樱）": "kinomoto fujitaka",
+            "木之本桃矢（魔卡少女樱）": "kinomoto touya",
+            "月城雪兔（魔卡少女樱）": "tsukishiro yukito",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
