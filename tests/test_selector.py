@@ -16,14 +16,15 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
     def test_bundles_revised_wai_v16_list(self) -> None:
-        self.assertEqual(5392, len(selector._CHARACTER_MAP))
-        self.assertEqual(5393, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5393, len(selector._ENGLISH_OPTIONS))
+        self.assertEqual(5423, len(selector._CHARACTER_MAP))
+        self.assertEqual(5424, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5424, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
             "黍（明日方舟）": "shu (arknights)",
             "阿（明日方舟）": "aak (arknights)",
+            "堇（蔚蓝档案）": "sumire (blue archive)",
             "佩丽卡（明日方舟终末地）": "perlica (arknights endfield)",
             "爱弥斯（鸣潮）": "aemeath (wuthering waves)",
             "达妮娅（鸣潮）": "denia (wuthering waves)",

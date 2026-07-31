@@ -5,7 +5,9 @@ License. The bundled list keeps the upstream WAI Illustrious v1.6 roster and
 applies verified additions and Chinese-name corrections for Arknights,
 Arknights: Endfield, Wuthering Waves, and Zenless Zone Zero. Version 1.1.0
 also imports canonical Arknights operator tags from the public AnimaDex
-catalogue when matched to the bilingual operator roster.
+catalogue when matched to the bilingual operator roster. Version 1.2.0 adds
+31 mainland-China Blue Archive base-character tags with exact model-tag
+evidence.
 """
 
 from __future__ import annotations
