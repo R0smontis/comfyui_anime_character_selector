@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v121_list(self) -> None:
-        self.assertEqual(5669, len(selector._CHARACTER_MAP))
-        self.assertEqual(5670, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5670, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v122_list(self) -> None:
+        self.assertEqual(5676, len(selector._CHARACTER_MAP))
+        self.assertEqual(5677, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5677, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -254,6 +254,14 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "妮卡·七浦（机动战士高达：水星的魔女）": "nika nanaura",
             "黑川茜（我推的孩子）": "kurokawa akane",
             "赞泽（葬送的芙莉莲）": "sense (sousou no frieren)",
+            "灰姑娘（胜利女神：NIKKE）": "cinderella (nikke)",
+            "贝伊（胜利女神：NIKKE）": "bay (nikke)",
+            "艾德（胜利女神：NIKKE）": "ade (nikke)",
+            "诺亚尔（胜利女神：NIKKE）": "noir (nikke)",
+            "布兰儿（胜利女神：NIKKE）": "blanc (nikke)",
+            "爱莲（胜利女神：NIKKE）": "elegg (nikke)",
+            "卡罗琳（尘白禁区）": "caroline (snowbreak)",
+            "知更鸟（崩坏：星穹铁道）": "robin (honkai: star rail)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
