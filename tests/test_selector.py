@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v120_list(self) -> None:
-        self.assertEqual(5662, len(selector._CHARACTER_MAP))
-        self.assertEqual(5663, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5663, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v121_list(self) -> None:
+        self.assertEqual(5669, len(selector._CHARACTER_MAP))
+        self.assertEqual(5670, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5670, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -247,6 +247,13 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "埃丽卡·布朗（紫罗兰永恒花园）": "erica brown",
             "班尼迪克特·布卢（紫罗兰永恒花园）": "benedict blue",
             "安妮·马格诺利亚（紫罗兰永恒花园）": "ann magnolia",
+            "店长（孤独摇滚）": "pa-san",
+            "后藤美智代（孤独摇滚）": "gotoh michiyo",
+            "乙女樱（莉可丽丝）": "otome sakura",
+            "普罗斯佩拉·墨丘利（机动战士高达：水星的魔女）": "prospera mercury",
+            "妮卡·七浦（机动战士高达：水星的魔女）": "nika nanaura",
+            "黑川茜（我推的孩子）": "kurokawa akane",
+            "赞泽（葬送的芙莉莲）": "sense (sousou no frieren)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
