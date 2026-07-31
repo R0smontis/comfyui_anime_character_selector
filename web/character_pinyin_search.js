@@ -15,9 +15,12 @@ const INPUT_H = 28;
 const ROW_H = 20;
 const MAX_LIST_H = 160;
 
-function initialsOf(name) {
+function pinyinOf(name) {
   const index = globalThis.__CHARACTER_PINYIN__;
-  return (index && index[name]) || "";
+  const entry = index && index[name];
+  if (!entry) return { i: "", p: "" };
+  if (typeof entry === "string") return { i: entry, p: "" }; // 兼容旧格式
+  return { i: entry.i || "", p: entry.p || "" };
 }
 
 const CJK_RE = /[\u3400-\u9fff\uf900-\ufaff]/;
@@ -27,21 +30,25 @@ function filterNames(names, query) {
   if (!q) return [];
   const ranked = [];
   for (const n of names) {
-    const init = initialsOf(n);
-    if (init && init.startsWith(q)) {
+    const { i, p } = pinyinOf(n);
+    if (i.startsWith(q)) {
       ranked.push([n, 0]);
+      continue;
+    }
+    if (p.startsWith(q)) {
+      ranked.push([n, 1]);
       continue;
     }
     const lower = n.toLowerCase();
     if (CJK_RE.test(q) && lower.includes(q)) {
-      ranked.push([n, 1]);
-      continue;
-    }
-    if (lower.includes(q)) {
       ranked.push([n, 2]);
       continue;
     }
-    if (init && init.includes(q)) ranked.push([n, 3]);
+    if (lower.includes(q)) {
+      ranked.push([n, 3]);
+      continue;
+    }
+    if (i.includes(q) || p.includes(q)) ranked.push([n, 4]);
   }
   ranked.sort((a, b) => a[1] - b[1]);
   return ranked.slice(0, MAX_RESULTS).map(([n]) => n);

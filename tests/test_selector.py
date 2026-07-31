@@ -15,10 +15,15 @@ from comfyui_anime_character_selector import anime_character_selector as selecto
 _CJK_RE = re.compile(r"[\u3400-\u9fff\uf900-\ufaff]")
 
 
-def _load_pinyin_index() -> dict[str, str]:
+def _load_pinyin_index() -> dict[str, dict[str, str]]:
     data_file = PACKAGE_DIR / "web" / "pinyin_data.js"
     raw = data_file.read_text(encoding="utf-8")
     return json.loads(raw[raw.index("{") : raw.rindex("}") + 1])
+
+
+def _pinyin_entry(name: str, index: dict[str, dict[str, str]]) -> tuple[str, str]:
+    entry = index.get(name, {})
+    return entry.get("i", ""), entry.get("p", "")
 
 
 class AnimeCharacterSelectorTests(unittest.TestCase):
@@ -37,12 +42,19 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
         self.assertEqual(missing, [], "every CJK display name needs a pinyin entry")
         self.assertGreater(len(index), 5000)
         # Spot-check initials: 凯露 -> kl..., 胡桃 -> ht..., 空崎阳奈 -> kqyn...
-        self.assertTrue(index["凯露（公主连结！Re:Dive）"].startswith("kl"))
-        self.assertTrue(index["胡桃（原神）"].startswith("ht"))
-        self.assertTrue(index["空崎阳奈（蔚蓝档案）"].startswith("kqyn"))
-        # The frontend filter matches initials prefix
+        self.assertTrue(index["凯露（公主连结！Re:Dive）"]["i"].startswith("kl"))
+        self.assertTrue(index["胡桃（原神）"]["i"].startswith("ht"))
+        self.assertTrue(index["空崎阳奈（蔚蓝档案）"]["i"].startswith("kqyn"))
+        # Spot-check full pinyin: 胡桃 -> hutaoyuanshen, 凯露 -> kailu..., 空崎阳奈 -> kongqi...
+        self.assertTrue(index["胡桃（原神）"]["p"].startswith("hutao"))
+        self.assertTrue(index["凯露（公主连结！Re:Dive）"]["p"].startswith("kailu"))
+        self.assertTrue(index["空崎阳奈（蔚蓝档案）"]["p"].startswith("kongqi"))
+        # 爱丽丝·卡塔雷特: full pinyin joins CJK syllables only
+        self.assertTrue(index["爱丽丝·卡塔雷特（黄金拼图）"]["p"].startswith("ailisikataleite"))
         self.assertIn("凯露（公主连结！Re:Dive）", index)
-        self.assertTrue(all(v.islower() for v in index.values()))
+        for entry in index.values():
+            self.assertTrue(entry["i"].islower())
+            self.assertTrue(entry["p"].islower())
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
