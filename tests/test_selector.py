@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v137_list(self) -> None:
-        self.assertEqual(5723, len(selector._CHARACTER_MAP))
-        self.assertEqual(5724, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5724, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v138_list(self) -> None:
+        self.assertEqual(5721, len(selector._CHARACTER_MAP))
+        self.assertEqual(5722, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5722, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -74,7 +74,7 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "堇（蔚蓝档案）": "sumire (blue archive)",
             "长发公主（胜利女神：NIKKE）": "rapunzel (nikke)",
             "诺伊斯（胜利女神：NIKKE）": "noise (nikke)",
-            "佩丽卡（明日方舟终末地）": "perlica (arknights endfield)",
+            
             "爱弥斯（鸣潮）": "aemeath (wuthering waves)",
             "达妮娅（鸣潮）": "denia (wuthering waves)",
             "铃（绝区零）": "belle (zenless zone zero)",
@@ -362,6 +362,8 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "罗塞塔（战双帕弥什）": "rosetta (pgr)",
             "邦比娜塔（战双帕弥什）": "bambinata (pgr)",
             "赛琳娜（战双帕弥什）": "selena (pgr)",
+            "管理员（明日方舟：终末地）": "endministrator (arknights)",
+            "佩丽卡（明日方舟：终末地）": "perlica (arknights)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):

@@ -1,6 +1,6 @@
 [project]
 name = "anime-character-selector"
-version = "1.37.0"
+version = "1.38.0"
 description = "面向 WAI Illustrious 的二次元角色选择器，提供中文角色名和英文模型标签下拉列表。"
 license = { file = "LICENSE" }
 requires-python = ">=3.9"
