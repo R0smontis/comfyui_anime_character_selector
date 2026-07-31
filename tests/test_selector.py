@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v115_list(self) -> None:
-        self.assertEqual(5571, len(selector._CHARACTER_MAP))
-        self.assertEqual(5572, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5572, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v116_list(self) -> None:
+        self.assertEqual(5588, len(selector._CHARACTER_MAP))
+        self.assertEqual(5589, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5589, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -155,6 +155,23 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "波玛（攻壳机动队）": "boma (gits)",
             "塔奇克马（攻壳机动队）": "tachikoma",
             "富奇科马（攻壳机动队）": "fuchikoma",
+            "地场卫（美少女战士）": "chiba mamoru",
+            "天王遥（美少女战士）": "ten'ou haruka",
+            "海王满（美少女战士）": "kaiou michiru",
+            "冥王雪奈（美少女战士）": "meiou setsuna",
+            "星野光（美少女战士）": "seiya kou",
+            "大气光（美少女战士）": "taiki kou",
+            "夜天光（美少女战士）": "yaten kou",
+            "早乙女乱马（乱马½）": "saotome ranma",
+            "天道靡（乱马½）": "tendou nabiki",
+            "天道霞（乱马½）": "tendou kasumi",
+            "天道早云（乱马½）": "tendou souun",
+            "早乙女玄马（乱马½）": "saotome genma",
+            "沐丝（乱马½）": "mousse (ranma 1/2)",
+            "裤袜太郎（乱马½）": "pantyhose tarou",
+            "九能带刀（乱马½）": "kunou tatewaki",
+            "九能小太刀（乱马½）": "kunou kodachi",
+            "五寸钉光（乱马½）": "gosunkugi hikaru",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
