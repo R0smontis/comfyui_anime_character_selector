@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v124_list(self) -> None:
-        self.assertEqual(5682, len(selector._CHARACTER_MAP))
-        self.assertEqual(5683, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5683, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v125_list(self) -> None:
+        self.assertEqual(5687, len(selector._CHARACTER_MAP))
+        self.assertEqual(5688, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5688, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -285,6 +285,14 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "玛薇卡（原神）": "mavuika (genshin impact)",
             "希诺宁（原神）": "xilonen (genshin impact)",
             "瓦蕾莎（原神）": "varesa (genshin impact)",
+            "朱菜（关于我转生变成史莱姆这档事）": "shuna (tensura)",
+            "星锑（重返未来：1999）": "regulus (reverse:1999)",
+            "苏芙比（重返未来：1999）": "sotheby",
+            "有村麻央（学园偶像大师）": "arimura mao",
+            "利维坦（胜利女神：NIKKE）": "leviathan (nikke)",
+            "无声铃鹿（赛马娘）": "silence suzuka (umamusume)",
+            "东海帝皇（赛马娘）": "tokai teio (umamusume)",
+            "月村手毬（学园偶像大师）": "tsukimura temari",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
