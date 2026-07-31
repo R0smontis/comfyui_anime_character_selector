@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v110_list(self) -> None:
-        self.assertEqual(5537, len(selector._CHARACTER_MAP))
-        self.assertEqual(5538, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5538, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v111_list(self) -> None:
+        self.assertEqual(5546, len(selector._CHARACTER_MAP))
+        self.assertEqual(5547, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5547, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -120,6 +120,15 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "格蕾特尔（黑礁）": "gretel (black lagoon)",
             "汉塞尔（黑礁）": "hansel (black lagoon)",
             "约兰达（黑礁）": "yolanda (black lagoon)",
+            "古河秋生（CLANNAD）": "furukawa akio",
+            "古河早苗（CLANNAD）": "furukawa sanae",
+            "伊吹风子（CLANNAD）": "ibuki fuuko",
+            "宫泽有纪宁（CLANNAD）": "miyazawa yukine",
+            "冈崎汐（CLANNAD）": "okazaki ushio",
+            "相乐美佐枝（CLANNAD）": "sagara misae",
+            "春原芽衣（CLANNAD）": "sunohara mei",
+            "春原阳平（CLANNAD）": "sunohara youhei",
+            "芳野祐介（CLANNAD）": "yoshino yuusuke",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
