@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v118_list(self) -> None:
-        self.assertEqual(5620, len(selector._CHARACTER_MAP))
-        self.assertEqual(5621, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5621, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v119_list(self) -> None:
+        self.assertEqual(5645, len(selector._CHARACTER_MAP))
+        self.assertEqual(5646, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5646, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -204,6 +204,31 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "帕特莉西亚·马汀（幸运星）": "patricia martin",
             "白石稔（幸运星）": "shiraishi minoru",
             "田村日和（幸运星）": "tamura hiyori",
+            "犬夜叉（犬夜叉）": "inuyasha (character)",
+            "弥勒（犬夜叉）": "miroku (inuyasha)",
+            "七宝（犬夜叉）": "shippou (inuyasha)",
+            "桔梗（犬夜叉）": "kikyou (inuyasha)",
+            "铃（犬夜叉）": "rin (inuyasha)",
+            "邪见（犬夜叉）": "jaken",
+            "神乐（犬夜叉）": "kagura (inuyasha)",
+            "琥珀（犬夜叉）": "kohaku (inuyasha)",
+            "钢牙（犬夜叉）": "kouga (inuyasha)",
+            "云母（犬夜叉）": "kirara (inuyasha)",
+            "诸叶（犬夜叉）": "moroha",
+            "奈落（犬夜叉）": "naraku (inuyasha)",
+            "诸星当（福星小子）": "moroboshi ataru",
+            "三宅忍（福星小子）": "miyake shinobu",
+            "面堂终太郎（福星小子）": "mendou shuutarou",
+            "藤波龙之介（福星小子）": "fujinami ryuunosuke",
+            "弁天（福星小子）": "benten (urusei yatsura)",
+            "小天（福星小子）": "ten (urusei yatsura)",
+            "兰（福星小子）": "ran (urusei yatsura)",
+            "阿雪（福星小子）": "oyuki (urusei yatsura)",
+            "错乱坊（福星小子）": "cherry (urusei yatsura)",
+            "樱花（福星小子）": "sakura (urusei yatsura)",
+            "克拉玛（福星小子）": "kurama (urusei yatsura)",
+            "眼镜（福星小子）": "megane (urusei yatsura)",
+            "波卷（福星小子）": "perm (urusei yatsura)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
