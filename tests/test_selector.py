@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v131_list(self) -> None:
-        self.assertEqual(5697, len(selector._CHARACTER_MAP))
-        self.assertEqual(5698, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5698, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v132_list(self) -> None:
+        self.assertEqual(5700, len(selector._CHARACTER_MAP))
+        self.assertEqual(5701, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5701, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -326,6 +326,15 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "黄金巨匠（赛马娘）": "orfevre (umamusume)",
             "目白莱恩（赛马娘）": "mejiro ryan (umamusume)",
             "爱慕织姬（赛马娘）": "admire vega (umamusume)",
+            "比安卡（战双帕弥什）": "bianca (pgr)",
+            "七实（战双帕弥什）": "nanami (pgr)",
+            "卡列尼娜（战双帕弥什）": "karenina (pgr)",
+            "娜尔梅亚（碧蓝幻想）": "narmaya (granblue fantasy)",
+            "德丽莎·阿波卡利斯（崩坏3rd）": "theresa apocalypse",
+            "娜尔梅亚·夏日（碧蓝幻想）": "narmaya (summer) (granblue fantasy)",
+            "德丽莎·阿波卡利斯（月下眷属）（崩坏3rd）": "theresa apocalypse (luna kindred)",
+            "德丽莎·阿波卡利斯（月誓绯爱）（崩坏3rd）": "theresa apocalypse (lunar vow  crimson love)",
+            "德丽莎·阿波卡利斯（女武神誓约）（崩坏3rd）": "theresa apocalypse (valkyrie pledge)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
