@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -10,6 +12,14 @@ sys.path.insert(0, str(PACKAGE_DIR.parent))
 from comfyui_anime_character_selector import NODE_CLASS_MAPPINGS  # noqa: E402
 from comfyui_anime_character_selector import anime_character_selector as selector  # noqa: E402
 
+_CJK_RE = re.compile(r"[\u3400-\u9fff\uf900-\ufaff]")
+
+
+def _load_pinyin_index() -> dict[str, str]:
+    data_file = PACKAGE_DIR / "web" / "pinyin_data.js"
+    raw = data_file.read_text(encoding="utf-8")
+    return json.loads(raw[raw.index("{") : raw.rindex("}") + 1])
+
 
 class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -19,6 +29,20 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
         self.assertEqual(5721, len(selector._CHARACTER_MAP))
         self.assertEqual(5722, len(selector._CHINESE_OPTIONS))
         self.assertEqual(5722, len(selector._ENGLISH_OPTIONS))
+
+    def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
+        index = _load_pinyin_index()
+        cjk_names = [n for n in selector._CHINESE_OPTIONS if _CJK_RE.search(n)]
+        missing = [n for n in cjk_names if n not in index]
+        self.assertEqual(missing, [], "every CJK display name needs a pinyin entry")
+        self.assertGreater(len(index), 5000)
+        # Spot-check initials: 凯露 -> kl..., 胡桃 -> ht..., 空崎阳奈 -> kqyn...
+        self.assertTrue(index["凯露（公主连结！Re:Dive）"].startswith("kl"))
+        self.assertTrue(index["胡桃（原神）"].startswith("ht"))
+        self.assertTrue(index["空崎阳奈（蔚蓝档案）"].startswith("kqyn"))
+        # The frontend filter matches initials prefix
+        self.assertIn("凯露（公主连结！Re:Dive）", index)
+        self.assertTrue(all(v.islower() for v in index.values()))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
