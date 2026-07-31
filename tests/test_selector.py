@@ -25,6 +25,7 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "黍（明日方舟）": "shu (arknights)",
             "佩丽卡（明日方舟终末地）": "perlica (arknights endfield)",
             "爱弥斯（鸣潮）": "aemeath (wuthering waves)",
+            "达妮娅（鸣潮）": "denia (wuthering waves)",
             "铃（绝区零）": "belle (zenless zone zero)",
         }
         for chinese_name, tag in expected.items():
