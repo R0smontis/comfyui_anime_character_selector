@@ -3,7 +3,9 @@
 Derived from mirabarukaso/ComfyUI_Mira's WAI character selector under the MIT
 License. The bundled list keeps the upstream WAI Illustrious v1.6 roster and
 applies verified additions and Chinese-name corrections for Arknights,
-Arknights: Endfield, Wuthering Waves, and Zenless Zone Zero.
+Arknights: Endfield, Wuthering Waves, and Zenless Zone Zero. Version 1.1.0
+also imports canonical Arknights operator tags from the public AnimaDex
+catalogue when matched to the bilingual operator roster.
 """
 
 from __future__ import annotations
