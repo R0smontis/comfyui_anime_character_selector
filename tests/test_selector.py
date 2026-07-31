@@ -15,7 +15,7 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v128_list(self) -> None:
+    def test_bundles_revised_wai_v129_list(self) -> None:
         self.assertEqual(5692, len(selector._CHARACTER_MAP))
         self.assertEqual(5693, len(selector._CHINESE_OPTIONS))
         self.assertEqual(5693, len(selector._ENGLISH_OPTIONS))
@@ -317,6 +317,9 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "早濑优香（运动服）（蔚蓝档案）": "yuuka (track) (blue archive)",
             "黑馆羽留奈（蔚蓝档案）": "haruna (blue archive)",
             "黑馆羽留奈（体操服）（蔚蓝档案）": "haruna (track) (blue archive)",
+            "樱井美代（蔚蓝档案）": "miyo (blue archive)",
+            "空井咲（蔚蓝档案）": "saki (blue archive)",
+            "空井咲（泳装）（蔚蓝档案）": "saki (swimsuit) (blue archive)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
