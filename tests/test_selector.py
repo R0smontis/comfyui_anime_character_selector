@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v119_list(self) -> None:
-        self.assertEqual(5645, len(selector._CHARACTER_MAP))
-        self.assertEqual(5646, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5646, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v120_list(self) -> None:
+        self.assertEqual(5662, len(selector._CHARACTER_MAP))
+        self.assertEqual(5663, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5663, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -229,6 +229,24 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "克拉玛（福星小子）": "kurama (urusei yatsura)",
             "眼镜（福星小子）": "megane (urusei yatsura)",
             "波卷（福星小子）": "perm (urusei yatsura)",
+            "艾基尔（刀剑神域）": "agil",
+            "克莱因（刀剑神域）": "klein (sao)",
+            "阿尔戈（刀剑神域）": "argo the rat",
+            "须乡伸之（刀剑神域）": "sugou nobuyuki",
+            "茅场晶彦（刀剑神域）": "kayaba akihiko",
+            "尤吉欧（刀剑神域）": "eugeo",
+            "幸（刀剑神域）": "sachi (sao)",
+            "西莉卡（刀剑神域）": "silica",
+            "吉尔伯特·布干维利亚（紫罗兰永恒花园）": "gilbert bougainvillea",
+            "克劳迪娅·霍金斯（紫罗兰永恒花园）": "claudia hodgins",
+            "迪特弗里特·布干维利亚（紫罗兰永恒花园）": "dietfried bougainvillea",
+            "爱丽丝·卡纳利（紫罗兰永恒花园）": "iris cannary",
+            "卡塔莉娜·博德莱尔（紫罗兰永恒花园）": "cattleya baudelaire",
+            "露库莉娅·马尔博罗（紫罗兰永恒花园）": "luculia marlborough",
+            "艾米·巴特莱特（紫罗兰永恒花园）": "amy bartlett",
+            "埃丽卡·布朗（紫罗兰永恒花园）": "erica brown",
+            "班尼迪克特·布卢（紫罗兰永恒花园）": "benedict blue",
+            "安妮·马格诺利亚（紫罗兰永恒花园）": "ann magnolia",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
