@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v122_list(self) -> None:
-        self.assertEqual(5676, len(selector._CHARACTER_MAP))
-        self.assertEqual(5677, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5677, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v123_list(self) -> None:
+        self.assertEqual(5680, len(selector._CHARACTER_MAP))
+        self.assertEqual(5681, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5681, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -262,6 +262,15 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "爱莲（胜利女神：NIKKE）": "elegg (nikke)",
             "卡罗琳（尘白禁区）": "caroline (snowbreak)",
             "知更鸟（崩坏：星穹铁道）": "robin (honkai: star rail)",
+            "灰原哀（名侦探柯南）": "haibara ai",
+            "玉叶妃（药屋少女的呢喃）": "gyokuyou (kusuriya no hitorigoto)",
+            "若月妮可（WITCH WATCH）": "wakatsuki nico",
+            "小舟潮（夏日重现）": "kofune ushio",
+            "胡蝶忍（鬼灭之刃）": "kochou shinobu",
+            "约尔·福杰（间谍过家家）": "yor briar",
+            "玛露希尔（迷宫饭）": "marcille donato",
+            "尤贝尔（葬送的芙莉莲）": "ubel (sousou no frieren)",
+            "山田杏奈（我心里危险的东西）": "yamada anna",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
