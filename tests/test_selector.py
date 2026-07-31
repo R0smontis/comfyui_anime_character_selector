@@ -16,9 +16,9 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
     def test_bundles_revised_wai_v16_list(self) -> None:
-        self.assertEqual(5443, len(selector._CHARACTER_MAP))
-        self.assertEqual(5444, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5444, len(selector._ENGLISH_OPTIONS))
+        self.assertEqual(5457, len(selector._CHARACTER_MAP))
+        self.assertEqual(5458, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5458, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -35,6 +35,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "桑多涅（原神）": "sandrone (genshin impact)",
             "茜特菈莉（原神）": "citlali (genshin impact)",
             "梦见月瑞希（原神）": "yumemizuki mizuki",
+            "赤木律子（新世纪福音战士）": "akagi ritsuko",
+            "菲·瓦伦丁（星际牛仔）": "faye valentine",
+            "桥田至（命运石之门）": "hashida itaru",
+            "真锅和（轻音少女）": "manabe nodoka",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):

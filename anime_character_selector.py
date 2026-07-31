@@ -11,6 +11,9 @@ evidence. Version 1.3.0 adds 11 NIKKE base-character tags verified against
 Chinese character pages and exact model-tag evidence. Version 1.4.0 adds
 8 Genshin Impact base-character tags and one NIKKE base-character tag,
 verified against BWiki roster pages and exact positive-count model tags.
+Version 1.5.0 adds 14 classic-anime character tags across Evangelion,
+Cowboy Bebop, Steins;Gate, and K-ON, verified against Chinese reference
+pages and exact positive-count model tags.
 """
 
 from __future__ import annotations
