@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v114_list(self) -> None:
-        self.assertEqual(5559, len(selector._CHARACTER_MAP))
-        self.assertEqual(5560, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5560, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v115_list(self) -> None:
+        self.assertEqual(5571, len(selector._CHARACTER_MAP))
+        self.assertEqual(5572, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5572, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -143,6 +143,18 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "三味线（凉宫春日的忧郁）": "shamisen (suzumiya haruhi)",
             "谷口（凉宫春日的忧郁）": "taniguchi (suzumiya haruhi)",
             "国木田（凉宫春日的忧郁）": "kunikida (suzumiya haruhi)",
+            "阿万音由季（命运石之门）": "amane yuki",
+            "天王寺绹（命运石之门）": "tennouji nae",
+            "天王寺裕吾（命运石之门）": "tennouji yuugo",
+            "椎名篝（命运石之门）": "shiina kagari",
+            "巴特（攻壳机动队）": "batou (gits)",
+            "户草（攻壳机动队）": "togusa (gits)",
+            "荒卷大辅（攻壳机动队）": "aramaki daisuke",
+            "石川（攻壳机动队）": "ishikawa (gits)",
+            "斋藤（攻壳机动队）": "saitou (gits)",
+            "波玛（攻壳机动队）": "boma (gits)",
+            "塔奇克马（攻壳机动队）": "tachikoma",
+            "富奇科马（攻壳机动队）": "fuchikoma",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):

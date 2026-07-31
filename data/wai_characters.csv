@@ -200,6 +200,7 @@ AK-15（少女前线）,ak-15 (girls' frontline)
 天音彼方 工作服（Hololive）,amane kanata (work)
 弥海砂（死亡笔记）,amane misa
 阿万音铃羽（命运石之门）,amane suzuha
+阿万音由季（命运石之门）,amane yuki
 天野阳菜（天气之子）,amano hina (tenki no ko)
 天野噼咔米（Vtuber）,amano pikamee
 天之川绮罗（GO! PRINCESS光之美少女）,amanogawa kirara
@@ -286,6 +287,7 @@ AN-94（少女前线）,an-94 (girls' frontline)
 新垣绫濑（我的妹妹哪有这么可爱）,aragaki ayase
 荒垣真次郎（女神异闻录3）,aragaki shinjirou
 荒木比奈（偶像大师灰姑娘女孩）,araki hina
+荒卷大辅（攻壳机动队）,aramaki daisuke
 兰那罗（原神）,aranara (genshin impact)
 阿良良木火怜（物语系列）,araragi karen
 阿良良木历（物语系列）,araragi koyomi
@@ -483,6 +485,7 @@ Archer（周瑜）（Fate/samurai remnant）,archer (fate/samurai remnant)
 巴兹尔（OMORI）,basil (omori)
 巴丹（碧蓝航线）,bataan (azur lane)
 蝙蝠少女（DC）,batgirl (dc)
+巴特（攻壳机动队）,batou (gits)
 战舰姬（舰队Collection）,battleship princess
 战舰水鬼（舰队Collection）,battleship water oni
 贝优妮塔（猎天使魔女）,bayonetta
@@ -556,6 +559,7 @@ Big Boss（合金装备）,big boss (metal gear solid)
 波巴·费特（星球大战）,boba fett (star wars)
 博科（少女与战车）,boko (girls und panzer)
 獺獭（日本网络迷因角色）,bokukawauso
+波玛（攻壳机动队）,boma (gits)
 波妮（宝可梦）,bonnie (pokemon)
 嘘嘘鬼（超级马力欧）,boo (mario)
 胡桃幽灵（原神）,boo tao (genshin impact)
@@ -1236,6 +1240,7 @@ fallenshadow（VTuber）,fallenshadow
 吹雪（一拳超人）,fubuki (one-punch man)
 吹雪·泳装（碧蓝档案）,fubuki (swimsuit) (blue archive)
 吹雪改二（舰队Collection）,fubuki kai ni (kancolle)
+富奇科马（攻壳机动队）,fuchikoma
 呆火鳄（宝可梦）,fuecoco (pokemon)
 风衣叶冬优（请问您今天要来点兔子吗？）,fuiba fuyu
 富士奇迹（赛马娘）,fuji kiseki (umamusume)
@@ -1908,6 +1913,7 @@ Inkling Girl（斯普拉遁）,inkling girl
 井芹仁菜（少女乐队的呐喊）,iseri nina
 石田雨龙（死神）,ishida uryuu (bleach)
 石神望（VTuber）,ishigami nozomi
+石川（攻壳机动队）,ishikawa (gits)
 石川月菜（不擅吸血的吸血鬼）,ishikawa luna
 以实玛利（月亮计划）,ishmael (project moon)
 伊什塔尔（Fate),ishtar (fate)
@@ -3971,6 +3977,7 @@ Saber Lily（Fate/Grand Order）,saber lily
 西园寺玛丽（VTuber）,saionji mary
 埼玉（一拳超人）,saitama (one-punch man)
 斋藤妮可（22/7）,saito nicole
+斋藤（攻壳机动队）,saitou (gits)
 斋藤始（Fate/Grand Order）,saitou hajime (fate)
 佐城雪美（偶像大师 灰姑娘女孩）,sajo yukimi
 坂上智代（CLANNAD）,sakagami tomoyo
@@ -4192,6 +4199,7 @@ SF-A2 米奇（VOCALOID）,sf-a2 miki
 时雨羽衣（幼年版）（VTuber）,shigure ui (vtuber) (young)
 四枫院夜一（死神）,shihouin yoruichi
 椎名亚树（春原庄的管理人小姐）,shiina aki
+椎名篝（命运石之门）,shiina kagari
 椎名真昼（邻座天使大人让我好困扰）,shiina mahiru (otonari no tenshi-sama)
 椎名真白（樱花庄的宠物女孩）,shiina mashiro
 椎名真由理（命运石之门）,shiina mayuri
@@ -4539,6 +4547,7 @@ Ta级战舰（舰队Collection）,ta-class battleship
 立花泷（你的名字）,tachibana taki
 立川绚香（22/7）,tachikawa ayaka
 太刀川美美（数码宝贝大冒险）,tachikawa mimi
+塔奇克马（攻壳机动队）,tachikoma
 多田李衣菜（偶像大师 灰姑娘女孩）,tada riina
 只野仁人（古见同学有交流障碍症）,tadano hitohito
 大鲸（舰队Collection）,taigei (kancolle)
@@ -4660,6 +4669,8 @@ TAR-21（少女前线）,tar-21 (girls' frontline)
 天马咲希（Project SEKAI）,tenma saki
 天马司（Project SEKAI）,tenma tsukasa
 天王星乌兹梅（超次元游戏 海王星）,tennouboshi uzume
+天王寺绹（命运石之门）,tennouji nae
+天王寺裕吾（命运石之门）,tennouji yuugo
 天王寺璃奈（Love Live! ）,tennouji rina (love live!)
 特诺奇蒂特兰（Fate）,tenochtitlan (fate)
 特诺奇蒂特兰（第二灵基）（Fate）,tenochtitlan (second ascension) (fate)
@@ -4727,6 +4738,7 @@ TMP（少女前线）,tmp (girls' frontline)
 渡我被身子（我的英雄学院）,toga himiko
 十神白夜（弹丸论破）,togami byakuya
 丰川祥子（BanG Dream!）,togawa sakiko
+户草（攻壳机动队）,togusa (gits)
 远野秋叶（月姬）,tohno akiha
 托尔（小林家的龙女仆）,tohru (maidragon)
 远坂凛（Fate/stay night）,tohsaka rin
