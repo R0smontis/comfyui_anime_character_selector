@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v117_list(self) -> None:
-        self.assertEqual(5602, len(selector._CHARACTER_MAP))
-        self.assertEqual(5603, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5603, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v118_list(self) -> None:
+        self.assertEqual(5620, len(selector._CHARACTER_MAP))
+        self.assertEqual(5621, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5621, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -186,6 +186,24 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "修奈泽尔·El·布里塔尼亚（反叛的鲁路修）": "schneizel el britannia",
             "藤堂镜志朗（反叛的鲁路修）": "toudou kyoushirou",
             "篠崎咲世子（反叛的鲁路修）": "shinozaki sayoko",
+            "阿列克斯·路易·阿姆斯特朗（钢之炼金术士）": "alex louis armstrong",
+            "格拉托尼（钢之炼金术士）": "gluttony (fma)",
+            "格利德（钢之炼金术士）": "greed (fma)",
+            "马斯·休斯（钢之炼金术士）": "maes hughes",
+            "普莱德（钢之炼金术士）": "pride (fma)",
+            "斯卡（钢之炼金术士）": "scar (fma)",
+            "斯洛斯（钢之炼金术士）": "sloth (fma)",
+            "泉·卡迪斯（钢之炼金术士）": "izumi curtis",
+            "佐尔夫·J·金布利（钢之炼金术士）": "solf j. kimblee",
+            "柊美纪（幸运星）": "hiiragi miki",
+            "泉彼方（幸运星）": "izumi kanata",
+            "泉总次郎（幸运星）": "izumi soujirou",
+            "黑井奈那子（幸运星）": "kuroi nanako",
+            "峰岸绫乃（幸运星）": "minegishi ayano",
+            "成实唯（幸运星）": "narumi yui",
+            "帕特莉西亚·马汀（幸运星）": "patricia martin",
+            "白石稔（幸运星）": "shiraishi minoru",
+            "田村日和（幸运星）": "tamura hiyori",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
