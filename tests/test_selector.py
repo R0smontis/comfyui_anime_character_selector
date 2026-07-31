@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v125_list(self) -> None:
-        self.assertEqual(5687, len(selector._CHARACTER_MAP))
-        self.assertEqual(5688, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5688, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v126_list(self) -> None:
+        self.assertEqual(5692, len(selector._CHARACTER_MAP))
+        self.assertEqual(5693, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5693, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -293,6 +293,17 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "无声铃鹿（赛马娘）": "silence suzuka (umamusume)",
             "东海帝皇（赛马娘）": "tokai teio (umamusume)",
             "月村手毬（学园偶像大师）": "tsukimura temari",
+            "结束祈（金牌得主）": "yuitsuka inori",
+            "冈崎祈（金牌得主）": "okazaki iruka",
+            "三轮霞（咒术回战）": "miwa kasumi",
+            "广濑夏子（全修。）": "hirose natsuko",
+            "尤尼奥（全修。）": "unio (zenshuu)",
+            "贝蒂（Re:从零开始的异世界生活）": "beatrice (re zero)",
+            "贝姬·布莱克贝尔（间谍过家家）": "becky blackbell",
+            "春乌菈菈（赛马娘）": "haru urara (umamusume)",
+            "摩耶重炮（赛马娘）": "mayano top gun (umamusume)",
+            "里见光钻（赛马娘）": "satono diamond (umamusume)",
+            "鲁道夫象征（赛马娘）": "symboli rudolf (umamusume)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
