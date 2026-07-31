@@ -8,7 +8,9 @@ also imports canonical Arknights operator tags from the public AnimaDex
 catalogue when matched to the bilingual operator roster. Version 1.2.0 adds
 31 mainland-China Blue Archive base-character tags with exact model-tag
 evidence. Version 1.3.0 adds 11 NIKKE base-character tags verified against
-Chinese character pages and exact model-tag evidence.
+Chinese character pages and exact model-tag evidence. Version 1.4.0 adds
+8 Genshin Impact base-character tags and one NIKKE base-character tag,
+verified against BWiki roster pages and exact positive-count model tags.
 """
 
 from __future__ import annotations
