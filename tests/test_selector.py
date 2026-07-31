@@ -16,12 +16,46 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
     def test_bundles_revised_wai_v16_list(self) -> None:
-        self.assertEqual(5470, len(selector._CHARACTER_MAP))
-        self.assertEqual(5471, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5471, len(selector._ENGLISH_OPTIONS))
+        self.assertEqual(5504, len(selector._CHARACTER_MAP))
+        self.assertEqual(5505, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5505, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
+            "安朵丝（少女前线2：追放）": "andoris (girls' frontline 2)",
+            "绯（少女前线2：追放）": "centaureissi (girls' frontline 2)",
+            "奇塔（少女前线2：追放）": "cheeta (girls' frontline 2)",
+            "寇尔芙（少女前线2：追放）": "colphne (girls' frontline 2)",
+            "黛烟（少女前线2：追放）": "daiyan (girls' frontline 2)",
+            "杜莎妮（少女前线2：追放）": "dushevnaya (girls' frontline 2)",
+            "芙洛伦（少女前线2：追放）": "florence (girls' frontline 2)",
+            "闪电（少女前线2：追放）": "groza (girls' frontline 2)",
+            "海伦（少女前线2：追放）": "helen (girls' frontline 2)",
+            "绛雨（少女前线2：追放）": "jiangyu (girls' frontline 2)",
+            "可露凯（少女前线2：追放）": "klukai (girls' frontline 2)",
+            "克罗丽科（少女前线2：追放）": "krolik (girls' frontline 2)",
+            "科谢尼娅（少女前线2：追放）": "ksenia (girls' frontline 2)",
+            "莱娅（少女前线2：追放）": "leva (girls' frontline 2)",
+            "刘易斯（少女前线2：追放）": "lewis (girls' frontline 2)",
+            "莉塔拉（少女前线2：追放）": "littara (girls' frontline 2)",
+            "洛塔（少女前线2：追放）": "lotta (girls' frontline 2)",
+            "玛绮朵（少女前线2：追放）": "makiatto (girls' frontline 2)",
+            "米什提（少女前线2：追放）": "mechty (girls' frontline 2)",
+            "莫辛纳甘（少女前线2：追放）": "mosin-nagant (girls' frontline 2)",
+            "纳甘（少女前线2：追放）": "nagant (girls' frontline 2)",
+            "纳美西丝（少女前线2：追放）": "nemesis (girls' frontline 2)",
+            "妮基塔（少女前线2：追放）": "nikketa (girls' frontline 2)",
+            "佩里缇亚（少女前线2：追放）": "peritya (girls' frontline 2)",
+            "琼玖（少女前线2：追放）": "qiongjiu (girls' frontline 2)",
+            "塞布丽娜（少女前线2：追放）": "sabrina (girls' frontline 2)",
+            "夏克里（少女前线2：追放）": "sharkry (girls' frontline 2)",
+            "春田（少女前线2：追放）": "springfield (girls' frontline 2)",
+            "索米（少女前线2：追放）": "suomi (girls' frontline 2)",
+            "托洛洛（少女前线2：追放）": "tololo (girls' frontline 2)",
+            "乌尔丽德（少女前线2：追放）": "ullrid (girls' frontline 2)",
+            "维克托（少女前线2：追放）": "vector (girls' frontline 2)",
+            "维普蕾（少女前线2：追放）": "vepley (girls' frontline 2)",
+            "朝晖（少女前线2：追放）": "zhaohui (girls' frontline 2)",
             "塞西尔·柯尔米（反叛的鲁路修）": "cecile croomy",
             "吉诺·温伯格（反叛的鲁路修）": "gino weinberg",
             "春川风希（莉可丽丝）": "harukawa fuki",
