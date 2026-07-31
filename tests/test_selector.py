@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v133_list(self) -> None:
-        self.assertEqual(5709, len(selector._CHARACTER_MAP))
-        self.assertEqual(5710, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5710, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v134_list(self) -> None:
+        self.assertEqual(5715, len(selector._CHARACTER_MAP))
+        self.assertEqual(5716, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5716, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -345,6 +345,12 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "诺克斯（无期迷途）": "nox (path to nowhere)",
             "白逸（无期迷途）": "bai yi (path to nowhere)",
             "卡利奥斯特罗（碧蓝幻想）": "cagliostro (granblue fantasy)",
+            "伊琳娜（无期迷途）": "eirene (path to nowhere)",
+            "哈梅尔（无期迷途）": "hamel (path to nowhere)",
+            "恩菲尔（无期迷途）": "enfer (path to nowhere)",
+            "阿黛拉（无期迷途）": "adela (path to nowhere)",
+            "希帕提娅（无期迷途）": "hypatia (path to nowhere)",
+            "德雷雅（无期迷途）": "dreya (path to nowhere)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
