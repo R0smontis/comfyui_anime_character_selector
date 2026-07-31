@@ -15,10 +15,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v16_list(self) -> None:
-        self.assertEqual(5504, len(selector._CHARACTER_MAP))
-        self.assertEqual(5505, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5505, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v18_list(self) -> None:
+        self.assertEqual(5514, len(selector._CHARACTER_MAP))
+        self.assertEqual(5515, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5515, len(selector._ENGLISH_OPTIONS))
 
     def test_representative_revised_game_mappings(self) -> None:
         expected = {
@@ -86,6 +86,17 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "菲·瓦伦丁（星际牛仔）": "faye valentine",
             "桥田至（命运石之门）": "hashida itaru",
             "真锅和（轻音少女）": "manabe nodoka",
+            "阿格莱雅（崩坏：星穹铁道）": "aglaea (honkai: star rail)",
+            "那刻夏（崩坏：星穹铁道）": "anaxa (honkai: star rail)",
+            "遐蝶（崩坏：星穹铁道）": "castorice (honkai: star rail)",
+            "赛飞儿（崩坏：星穹铁道）": "cipher (honkai: star rail)",
+            "昔涟（崩坏：星穹铁道）": "cyrene (honkai: star rail)",
+            "长夜月（崩坏：星穹铁道）": "evernight (honkai: star rail)",
+            "风堇（崩坏：星穹铁道）": "hyacine (honkai: star rail)",
+            "海瑟音（崩坏：星穹铁道）": "hysilens (honkai: star rail)",
+            "万敌（崩坏：星穹铁道）": "mydei (honkai: star rail)",
+            "火花（崩坏：星穹铁道）": "sparxie (honkai: star rail)",
+            "缇宝（崩坏：星穹铁道）": "tribbie (honkai: star rail)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
