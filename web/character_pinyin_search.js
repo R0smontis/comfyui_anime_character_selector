@@ -103,8 +103,7 @@ function filterNames(names, query) {
       };
       tryWindow(c);
       if (best < 0 && CJK_RE.test(q)) tryWindow(lower);
-      // 全拼窗口仅对核心无 CJK 的条目（如 La Signora（原神））有意义
-      if (best < 0 && !c) tryWindow(p);
+      // 纯拉丁核心条目（如 La Signora（原神））不走模糊：其拉丁名可由通用子串通道直接命中
     }
     if (best >= 0) ranked.push([n, 5, best]);
   }
