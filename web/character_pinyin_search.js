@@ -18,19 +18,54 @@ const MAX_LIST_H = 160;
 function pinyinOf(name) {
   const index = globalThis.__CHARACTER_PINYIN__;
   const entry = index && index[name];
-  if (!entry) return { i: "", p: "" };
-  if (typeof entry === "string") return { i: entry, p: "" }; // 兼容旧格式
-  return { i: entry.i || "", p: entry.p || "" };
+  if (!entry) return { i: "", p: "", c: "" };
+  if (typeof entry === "string") return { i: entry, p: "", c: "" }; // 兼容旧格式
+  return { i: entry.i || "", p: entry.p || "", c: entry.c || "" };
 }
 
 const CJK_RE = /[\u3400-\u9fff\uf900-\ufaff]/;
+
+// Damerau-Levenshtein（相邻换位计 1），用于模糊匹配
+function editDistance(a, b) {
+  if (a === b) return 0;
+  const al = a.length;
+  const bl = b.length;
+  if (!al) return bl;
+  if (!bl) return al;
+  const prev = new Uint8Array(bl + 1);
+  const cur = new Uint8Array(bl + 1);
+  for (let j = 0; j <= bl; j++) prev[j] = j;
+  for (let i = 1; i <= al; i++) {
+    cur[0] = i;
+    let prevPrev = prev[0];
+    for (let j = 1; j <= bl; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let v = Math.min(cur[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
+      // 相邻换位：a[i-2]==b[j-1] && a[i-1]==b[j-2]
+      if (i > 1 && j > 1 && a[i - 2] === b[j - 1] && a[i - 1] === b[j - 2]) {
+        v = Math.min(v, prevPrev + 1);
+      }
+      cur[j] = v;
+      prevPrev = prev[j];
+    }
+    const t = prev;
+    prev.set(cur);
+    cur.set(t);
+  }
+  return prev[bl];
+}
+
+function fuzzyMaxDist(q) {
+  return q.length <= 4 ? 1 : 2;
+}
 
 function filterNames(names, query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   const ranked = [];
+  const maxDist = fuzzyMaxDist(q);
   for (const n of names) {
-    const { i, p } = pinyinOf(n);
+    const { i, p, c } = pinyinOf(n);
     if (i.startsWith(q)) {
       ranked.push([n, 0]);
       continue;
@@ -48,9 +83,32 @@ function filterNames(names, query) {
       ranked.push([n, 3]);
       continue;
     }
-    if (i.includes(q) || p.includes(q)) ranked.push([n, 4]);
+    if (i.includes(q) || p.includes(q)) {
+      ranked.push([n, 4]);
+      continue;
+    }
+    // 模糊通道（rank 5）：核心拼音错打 / 中文错字 / 全拼错打
+    // 对 核心拼音/中文名 的前缀窗口计算距离，支持“部分输入+错打”（如 kongxi -> 空崎）
+    let best = -1;
+    if (q.length >= 2) {
+      const tryWindow = (candidate) => {
+        if (!candidate) return;
+        const lo = Math.max(1, q.length - maxDist);
+        const hi = Math.min(candidate.length, q.length + maxDist);
+        for (let L = lo; L <= hi; L++) {
+          // 距离 + 长度差惩罚：抑制“前缀相似但明显更短”的噪音候选
+          const d = editDistance(candidate.slice(0, L), q) + Math.abs(L - q.length);
+          if (d <= maxDist) best = best < 0 ? d : Math.min(best, d);
+        }
+      };
+      tryWindow(c);
+      if (best < 0 && CJK_RE.test(q)) tryWindow(lower);
+      // 全拼窗口仅对核心无 CJK 的条目（如 La Signora（原神））有意义
+      if (best < 0 && !c) tryWindow(p);
+    }
+    if (best >= 0) ranked.push([n, 5, best]);
   }
-  ranked.sort((a, b) => a[1] - b[1]);
+  ranked.sort((a, b) => a[1] - b[1] || a[2] - b[2] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
   return ranked.slice(0, MAX_RESULTS).map(([n]) => n);
 }
 
@@ -62,7 +120,7 @@ function buildSearchWidget(node, charWidget) {
 
   const input = document.createElement("input");
   input.type = "text";
-  input.placeholder = "拼音首字母 / 中文搜索…";
+  input.placeholder = "拼音 / 中文 / 模糊搜索…";
   input.spellcheck = false;
   input.style.cssText =
     "flex:0 0 auto;width:100%;box-sizing:border-box;font-size:12px;" +
