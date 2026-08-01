@@ -55,17 +55,9 @@ function fuzzyMaxDist(q) {
   return q.length <= 4 ? 1 : 2;
 }
 
-// q 的每个字符是否按序出现在 s 中（子序列匹配）
-function isSubsequence(q, s) {
-  let j = 0;
-  for (let k = 0; k < s.length && j < q.length; k++) {
-    if (s[k] === q[j]) j++;
-  }
-  return j === q.length;
-}
 
 // 返回按匹配质量排序的名字数组（前 MAX_RESULTS 个）。
-// 排序层级：rank(0-5) -> 模糊桶(0 首字母子序列 / 1 其他模糊) -> 编辑距离 -> 名称。
+// 排序层级：首字母前缀 -> 全拼前缀 -> 直接子串 -> 连续首字母 -> 全拼包含 -> 其他模糊。
 function filterNames(names, query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
@@ -90,18 +82,18 @@ function filterNames(names, query) {
       ranked.push([n, 3, 0, 0]);
       continue;
     }
-    // 包含匹配（rank 4）：仅对 >=3 字符查询启用，避免 2 字符首字母子串噪音
-    if (q.length >= 3 && (i.includes(q) || p.includes(q))) {
+    // 连续首字母匹配优先：q 必须在角色拼音首字母串 i 中连续出现。
+    // 两字符即可启用；首字母前缀已由 rank 0 更早捕获。
+    if (q.length >= 2 && i.includes(q)) {
       ranked.push([n, 4, 0, 0]);
       continue;
     }
-    // 模糊通道（rank 5）：
-    //   桶 0：查询的每个拼音首字母在角色首字母序列中按序出现（子序列匹配）
-    //   桶 1：其余编辑距离模糊（核心拼音 / 中文名前缀窗口 + 长度惩罚）
-    if (q.length >= 2 && isSubsequence(q, i)) {
-      ranked.push([n, 5, 0, 0]);
+    // 全拼包含排在连续首字母之后，且保持 >=3 字符以避免短查询噪音。
+    if (q.length >= 3 && p.includes(q)) {
+      ranked.push([n, 4, 1, 0]);
       continue;
     }
+    // 其他模糊（rank 5）：核心拼音 / 中文名前缀窗口 + 长度惩罚。
     let best = -1;
     if (q.length >= 2) {
       const tryWindow = (candidate) => {
@@ -117,7 +109,7 @@ function filterNames(names, query) {
       if (best < 0 && CJK_RE.test(q)) tryWindow(lower);
       // 纯拉丁核心条目（如 La Signora（原神））不走模糊：拉丁名由子串通道直接命中
     }
-    if (best >= 0) ranked.push([n, 5, 1, best]);
+    if (best >= 0) ranked.push([n, 5, 0, best]);
   }
   ranked.sort(
     (a, b) =>
