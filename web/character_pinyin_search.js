@@ -4,9 +4,9 @@
 // 注入 combo 下拉菜单的默认过滤输入框（input.comfy-context-menu-filter）：
 //   - 输入拼音首字母（ht -> 胡桃）、全拼（hutao -> 胡桃）、模糊容错（huato/糊桃 -> 胡桃）、
 //     中文子串均可匹配角色中文名
-//   - 显示全部匹配候选（多候选），方向键/Enter/Escape 导航与 Comfy 原生一致
-// 实现：在捕获阶段监听过滤框的 input/keydown 并 stopImmediatePropagation，
-// 使内建扩展的纯子串过滤逻辑不再执行；非中文菜单（英文名等）不接管，走原逻辑。
+//   - 显示多个匹配候选（最多 100 项），并按匹配质量重排；方向键/Enter/Escape 导航与 Comfy 原生一致
+// 实现：cloneNode 替换过滤框以剥离内建 input/keydown 监听器，再绑定拼音/模糊过滤；
+// 非中文菜单（英文名等）不接管，继续使用原生逻辑。
 // 拼音数据由 tools/generate_pinyin_data.py 生成，见 web/pinyin_data.js
 // （globalThis.__CHARACTER_PINYIN__，每条 { i: 首字母, p: 全拼, c: 核心拼音 }）。
 import { app } from "../../scripts/app.js";
@@ -55,8 +55,17 @@ function fuzzyMaxDist(q) {
   return q.length <= 4 ? 1 : 2;
 }
 
-// 返回命中的名字数组（按匹配质量排序，前 MAX_RESULTS 个）。
-// 排序仅决定截断边界，菜单内仍按原始 values 顺序展示。
+// q 的每个字符是否按序出现在 s 中（子序列匹配）
+function isSubsequence(q, s) {
+  let j = 0;
+  for (let k = 0; k < s.length && j < q.length; k++) {
+    if (s[k] === q[j]) j++;
+  }
+  return j === q.length;
+}
+
+// 返回按匹配质量排序的名字数组（前 MAX_RESULTS 个）。
+// 排序层级：rank(0-5) -> 模糊桶(0 首字母子序列 / 1 其他模糊) -> 编辑距离 -> 名称。
 function filterNames(names, query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
@@ -65,28 +74,34 @@ function filterNames(names, query) {
   for (const n of names) {
     const { i, p, c } = pinyinOf(n);
     if (i.startsWith(q)) {
-      ranked.push([n, 0]);
+      ranked.push([n, 0, 0, 0]);
       continue;
     }
     if (p.startsWith(q)) {
-      ranked.push([n, 1]);
+      ranked.push([n, 1, 0, 0]);
       continue;
     }
     const lower = n.toLowerCase();
     if (CJK_RE.test(q) && lower.includes(q)) {
-      ranked.push([n, 2]);
+      ranked.push([n, 2, 0, 0]);
       continue;
     }
     if (lower.includes(q)) {
-      ranked.push([n, 3]);
+      ranked.push([n, 3, 0, 0]);
       continue;
     }
     // 包含匹配（rank 4）：仅对 >=3 字符查询启用，避免 2 字符首字母子串噪音
     if (q.length >= 3 && (i.includes(q) || p.includes(q))) {
-      ranked.push([n, 4]);
+      ranked.push([n, 4, 0, 0]);
       continue;
     }
-    // 模糊通道（rank 5）：核心拼音 / 中文名前缀窗口 + 长度惩罚
+    // 模糊通道（rank 5）：
+    //   桶 0：查询的每个拼音首字母在角色首字母序列中按序出现（子序列匹配）
+    //   桶 1：其余编辑距离模糊（核心拼音 / 中文名前缀窗口 + 长度惩罚）
+    if (q.length >= 2 && isSubsequence(q, i)) {
+      ranked.push([n, 5, 0, 0]);
+      continue;
+    }
     let best = -1;
     if (q.length >= 2) {
       const tryWindow = (candidate) => {
@@ -102,10 +117,11 @@ function filterNames(names, query) {
       if (best < 0 && CJK_RE.test(q)) tryWindow(lower);
       // 纯拉丁核心条目（如 La Signora（原神））不走模糊：拉丁名由子串通道直接命中
     }
-    if (best >= 0) ranked.push([n, 5, best]);
+    if (best >= 0) ranked.push([n, 5, 1, best]);
   }
   ranked.sort(
-    (a, b) => a[1] - b[1] || a[2] - b[2] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)
+    (a, b) =>
+      a[1] - b[1] || a[2] - b[2] || a[3] - b[3] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)
   );
   return ranked.slice(0, MAX_RESULTS).map(([n]) => n);
 }
@@ -148,12 +164,20 @@ function enhanceMenu(ctx, values) {
 
   const applyFilter = (term) => {
     const q = term.trim();
-    const hits = q ? new Set(filterNames(names, q)) : null;
-    displayed = items.filter((item) => {
-      const visible = !hits || hits.has(item.textContent);
-      item.style.display = visible ? "block" : "none";
-      return visible;
-    });
+    if (q) {
+      // 按匹配质量重排：命中项按 filterNames 顺序移动到菜单顶部
+      const orderedNames = filterNames(names, q);
+      const itemByName = new Map(items.map((item) => [item.textContent, item]));
+      displayed = orderedNames.map((name) => itemByName.get(name)).filter(Boolean);
+      const visibleItems = new Set(displayed);
+      for (const item of items) item.style.display = visibleItems.has(item) ? "block" : "none";
+      for (const item of displayed) ctx.root.appendChild(item);
+    } else {
+      // 清空查询：恢复原始顺序并全部显示
+      for (const item of items) ctx.root.appendChild(item);
+      displayed = items;
+      for (const item of items) item.style.display = "block";
+    }
     selectedIndex = 0;
     if (selectedItem && displayed.includes(selectedItem)) {
       selectedIndex = displayed.findIndex((d) => d === selectedItem);
