@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v154_list(self) -> None:
-        self.assertEqual(5785, len(selector._CHARACTER_MAP))
-        self.assertEqual(5786, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5786, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v155_list(self) -> None:
+        self.assertEqual(5789, len(selector._CHARACTER_MAP))
+        self.assertEqual(5790, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5790, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -436,6 +436,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "清宵（鸣潮）": "qingxiao (wuthering waves)",
             "景燃（鸣潮）": "jingran (wuthering waves)",
             "心（鸣潮）": "hsin (wuthering waves)",
+            "绫濑桃（胆大党）": "ayase momo",
+            "高仓健（胆大党）": "takakura ken (dandadan)",
+            "白鸟爱罗（胆大党）": "shiratori aira (dandadan)",
+            "绫濑星子（胆大党）": "ayase seiko",
             "光熙（电锯人）": "quanxi (chainsaw man)",
             "大卫·马丁内斯（赛博朋克：边缘行者）": "david martinez",
             "伏黑甚尔（咒术回战）": "fushiguro toji",
