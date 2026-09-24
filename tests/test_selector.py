@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v152_list(self) -> None:
-        self.assertEqual(5784, len(selector._CHARACTER_MAP))
-        self.assertEqual(5785, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5785, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v153_list(self) -> None:
+        self.assertEqual(5782, len(selector._CHARACTER_MAP))
+        self.assertEqual(5783, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5783, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -440,7 +440,6 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "久远寺有珠（魔法使之夜）": "kuonji alice",
             "静希草十郎（魔法使之夜）": "shizuki soujuurou",
             "特斯卡特利波卡（Fate）": "tezcatlipoca (fate)",
-            "所多玛之兽／德拉科（Fate）": "queen draco (fate)",
             "散兵（原神）": "scaramouche (genshin impact)",
             "哥伦比娅（原神）": "columbina (genshin impact)",
             "卡皮塔诺（原神）": "capitano (genshin impact)",
