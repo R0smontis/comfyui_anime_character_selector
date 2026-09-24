@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v148_list(self) -> None:
-        self.assertEqual(5769, len(selector._CHARACTER_MAP))
-        self.assertEqual(5770, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5770, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v149_list(self) -> None:
+        self.assertEqual(5772, len(selector._CHARACTER_MAP))
+        self.assertEqual(5773, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5773, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -428,6 +428,11 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "玛恩纳（明日方舟）": "mlynar (arknights)",
             "夏沃蕾（原神）": "chevreuse (genshin impact)",
             "赛索斯（原神）": "sethos (genshin impact)",
+            "千早爱音（BanG Dream!）": "chihaya anon",
+            "长崎爽世（BanG Dream!）": "nagasaki soyo",
+            "三角初华（BanG Dream!）": "misumi uika",
+            "八幡海铃（BanG Dream!）": "yahata umiri",
+            "祐天寺若麦（BanG Dream!）": "yuutenji nyamu",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
