@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v150_list(self) -> None:
-        self.assertEqual(5775, len(selector._CHARACTER_MAP))
-        self.assertEqual(5776, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5776, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v151_list(self) -> None:
+        self.assertEqual(5779, len(selector._CHARACTER_MAP))
+        self.assertEqual(5780, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5780, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -437,6 +437,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "大卫·马丁内斯（赛博朋克：边缘行者）": "david martinez",
             "伏黑甚尔（咒术回战）": "fushiguro toji",
             "胡桃（莉可丽丝）": "kurumi (lycoris recoil)",
+            "久远寺有珠（魔法使之夜）": "kuonji alice",
+            "静希草十郎（魔法使之夜）": "shizuki soujuurou",
+            "特斯卡特利波卡（Fate）": "tezcatlipoca (fate)",
+            "所多玛之兽／德拉科（Fate）": "queen draco (fate)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
