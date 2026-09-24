@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v146_list(self) -> None:
-        self.assertEqual(5755, len(selector._CHARACTER_MAP))
-        self.assertEqual(5756, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5756, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v147_list(self) -> None:
+        self.assertEqual(5766, len(selector._CHARACTER_MAP))
+        self.assertEqual(5767, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5767, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -417,6 +417,13 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "梅里（胜利女神：NIKKE）": "mary (nikke)",
             "予愿安洁莉娜（明日方舟）": "angelina the mellow wish (arknights)",
             "新约能天使（明日方舟）": "exusiai the new covenant (arknights)",
+            "八奈见杏菜（败犬女主太多了！）": "yanami anna",
+            "烧盐柠檬（败犬女主太多了！）": "yakishio lemon",
+            "小鞠知花（败犬女主太多了！）": "komari chika",
+            "鲁珀（少女乐队的呐喊）": "rupa (girls band cry)",
+            "弗兰梅（葬送的芙莉莲）": "flamme (sousou no frieren)",
+            "希娜狄雅（崩坏3rd）": "senadina",
+            "森西（迷宫饭）": "senshi (dungeon meshi)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
