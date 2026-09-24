@@ -30,7 +30,7 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v158_list(self) -> None:
+    def test_bundles_revised_wai_v160_list(self) -> None:
         self.assertEqual(5813, len(selector._CHARACTER_MAP))
         self.assertEqual(5814, len(selector._CHINESE_OPTIONS))
         self.assertEqual(5814, len(selector._ENGLISH_OPTIONS))
