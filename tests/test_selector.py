@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v138_list(self) -> None:
-        self.assertEqual(5721, len(selector._CHARACTER_MAP))
-        self.assertEqual(5722, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5722, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v146_list(self) -> None:
+        self.assertEqual(5755, len(selector._CHARACTER_MAP))
+        self.assertEqual(5756, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5756, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -406,6 +406,17 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "赛琳娜（战双帕弥什）": "selena (pgr)",
             "管理员（明日方舟：终末地）": "endministrator (arknights)",
             "佩丽卡（明日方舟：终末地）": "perlica (arknights)",
+            "乱破（崩坏：星穹铁道）": "rappa (honkai: star rail)",
+            "椒丘（崩坏：星穹铁道）": "jiaoqiu (honkai: star rail)",
+            "忘归人（崩坏：星穹铁道）": "fugue (honkai: star rail)",
+            "加拉赫（崩坏：星穹铁道）": "gallagher (honkai: star rail)",
+            "欧洛伦（原神）": "ororon (genshin impact)",
+            "卡齐娜（原神）": "kachina (genshin impact)",
+            "皇冠（胜利女神：NIKKE）": "crown (nikke)",
+            "蒂亚（胜利女神：NIKKE）": "tia (nikke)",
+            "梅里（胜利女神：NIKKE）": "mary (nikke)",
+            "予愿安洁莉娜（明日方舟）": "angelina the mellow wish (arknights)",
+            "新约能天使（明日方舟）": "exusiai the new covenant (arknights)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
