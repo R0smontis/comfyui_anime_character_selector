@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v155_list(self) -> None:
-        self.assertEqual(5789, len(selector._CHARACTER_MAP))
-        self.assertEqual(5790, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5790, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v156_list(self) -> None:
+        self.assertEqual(5801, len(selector._CHARACTER_MAP))
+        self.assertEqual(5802, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5802, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -440,6 +440,18 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "高仓健（胆大党）": "takakura ken (dandadan)",
             "白鸟爱罗（胆大党）": "shiratori aira (dandadan)",
             "绫濑星子（胆大党）": "ayase seiko",
+            "小兰（药屋少女的呢喃）": "xiaolan (kusuriya no hitorigoto)",
+            "丽花（药屋少女的呢喃）": "lihua (kusuriya no hitorigoto)",
+            "李白（药屋少女的呢喃）": "lihaku (kusuriya no hitorigoto)",
+            "里树（药屋少女的呢喃）": "lishu (kusuriya no hitorigoto)",
+            "子翠（药屋少女的呢喃）": "shisui (kusuriya no hitorigoto)",
+            "楼兰（药屋少女的呢喃）": "loulan (kusuriya no hitorigoto)",
+            "邓肯（葬送的芙莉莲）": "denken (sousou no frieren)",
+            "拉奥芬（葬送的芙莉莲）": "lawine (sousou no frieren)",
+            "莉涅（葬送的芙莉莲）": "linie (sousou no frieren)",
+            "维贝尔（葬送的芙莉莲）": "wirbel (sousou no frieren)",
+            "梅特（葬送的芙莉莲）": "methode (sousou no frieren)",
+            "康涅（葬送的芙莉莲）": "kanne (sousou no frieren)",
             "光熙（电锯人）": "quanxi (chainsaw man)",
             "大卫·马丁内斯（赛博朋克：边缘行者）": "david martinez",
             "伏黑甚尔（咒术回战）": "fushiguro toji",
