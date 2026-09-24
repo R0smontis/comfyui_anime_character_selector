@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v151_list(self) -> None:
-        self.assertEqual(5779, len(selector._CHARACTER_MAP))
-        self.assertEqual(5780, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5780, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v152_list(self) -> None:
+        self.assertEqual(5784, len(selector._CHARACTER_MAP))
+        self.assertEqual(5785, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5785, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -441,6 +441,13 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "静希草十郎（魔法使之夜）": "shizuki soujuurou",
             "特斯卡特利波卡（Fate）": "tezcatlipoca (fate)",
             "所多玛之兽／德拉科（Fate）": "queen draco (fate)",
+            "散兵（原神）": "scaramouche (genshin impact)",
+            "哥伦比娅（原神）": "columbina (genshin impact)",
+            "卡皮塔诺（原神）": "capitano (genshin impact)",
+            "潘塔罗涅（原神）": "pantalone (genshin impact)",
+            "戴因斯雷布（原神）": "dainsleif (genshin impact)",
+            "归终（原神）": "guizhong (genshin impact)",
+            "萍姥姥（原神）": "madame ping (genshin impact)",
         }
         for chinese_name, tag in expected.items():
             with self.subTest(chinese_name=chinese_name):
