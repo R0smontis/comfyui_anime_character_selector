@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v157_list(self) -> None:
-        self.assertEqual(5807, len(selector._CHARACTER_MAP))
-        self.assertEqual(5808, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5808, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v158_list(self) -> None:
+        self.assertEqual(5813, len(selector._CHARACTER_MAP))
+        self.assertEqual(5814, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5814, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -458,6 +458,12 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "古贺朋绘（青春猪头少年系列）": "koga tomoe",
             "牧之原翔子（青春猪头少年系列）": "makinohara shouko",
             "双叶理央（青春猪头少年系列）": "futaba rio",
+            "桃喰绮罗莉（狂赌之渊）": "momobami kirari",
+            "早乙女芽亚里（狂赌之渊）": "saotome mary",
+            "柊娜娜（无能力者娜娜）": "hiiragi nana",
+            "沙耶（魔女之旅）": "saya (majo no tabitabi)",
+            "芙兰（魔女之旅）": "fran (majo no tabitabi)",
+            "艾维莉亚（魔女之旅）": "avilia (majo no tabitabi)",
             "光熙（电锯人）": "quanxi (chainsaw man)",
             "大卫·马丁内斯（赛博朋克：边缘行者）": "david martinez",
             "伏黑甚尔（咒术回战）": "fushiguro toji",
