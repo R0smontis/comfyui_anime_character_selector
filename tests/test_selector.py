@@ -30,10 +30,10 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.node = NODE_CLASS_MAPPINGS["AnimeCharacterSelectorCN"]()
 
-    def test_bundles_revised_wai_v156_list(self) -> None:
-        self.assertEqual(5801, len(selector._CHARACTER_MAP))
-        self.assertEqual(5802, len(selector._CHINESE_OPTIONS))
-        self.assertEqual(5802, len(selector._ENGLISH_OPTIONS))
+    def test_bundles_revised_wai_v157_list(self) -> None:
+        self.assertEqual(5807, len(selector._CHARACTER_MAP))
+        self.assertEqual(5808, len(selector._CHINESE_OPTIONS))
+        self.assertEqual(5808, len(selector._ENGLISH_OPTIONS))
 
     def test_pinyin_data_covers_all_cjk_display_names(self) -> None:
         index = _load_pinyin_index()
@@ -452,6 +452,12 @@ class AnimeCharacterSelectorTests(unittest.TestCase):
             "维贝尔（葬送的芙莉莲）": "wirbel (sousou no frieren)",
             "梅特（葬送的芙莉莲）": "methode (sousou no frieren)",
             "康涅（葬送的芙莉莲）": "kanne (sousou no frieren)",
+            "乾心寿（更衣人偶坠入爱河）": "inui shinju",
+            "菅谷乃羽（更衣人偶坠入爱河）": "sugaya nowa",
+            "卡蜜拉（间谍过家家）": "camilla (spy x family)",
+            "古贺朋绘（青春猪头少年系列）": "koga tomoe",
+            "牧之原翔子（青春猪头少年系列）": "makinohara shouko",
+            "双叶理央（青春猪头少年系列）": "futaba rio",
             "光熙（电锯人）": "quanxi (chainsaw man)",
             "大卫·马丁内斯（赛博朋克：边缘行者）": "david martinez",
             "伏黑甚尔（咒术回战）": "fushiguro toji",
